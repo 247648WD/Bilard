@@ -25,7 +25,7 @@ public class Bila
     private void setVel(int vel) { this.vel = vel; }
     private void setDir(int dir) { this.dir = dir; }
 
-    public void updatePos()
+    public void UpdatePos()
     {
         switch (dir)
         {
