@@ -5,24 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Prezentacja"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="Symulacja" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Rectangle
+        <Rectangle Grid.Row="0" Grid.Column="0"
     Width="700"
     Height="350"
     Fill="Green"
-    Canvas.Left="10"
-            Stroke="Black" StrokeThickness="3"
-    Canvas.Top="25" />
-        <Canvas>
-            <Ellipse x:Name="bila" Canvas.Left="100" HorizontalAlignment="Left" Height="59" Margin="267,217,0,0" Stroke="Black" VerticalAlignment="Top" Width="63" Fill="Beige"/>
-
+            Stroke="Black" StrokeThickness="3" Grid.ColumnSpan="4" Margin="10,42,50,42" />
+        <Canvas x:Name="canvas" Grid.ColumnSpan="5">
+            <Button x:Name="add" Click="add_bila">Dodaj bilę</Button>
         </Canvas>
     </Grid>
 </Window>
