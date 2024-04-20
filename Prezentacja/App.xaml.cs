@@ -9,6 +9,6 @@ namespace Prezentacja
     /// </summary>
     public partial class App : Application
     {
-    }
 
+    }
 }

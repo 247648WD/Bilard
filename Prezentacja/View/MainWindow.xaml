@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Prezentacja"
         mc:Ignorable="d"
-        Title="Symulacja" Height="450" Width="800">
+        Title="Symulacja" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -20,5 +20,9 @@
     Canvas.Left="10"
             Stroke="Black" StrokeThickness="3"
     Canvas.Top="25" />
+        <Canvas>
+            <Ellipse x:Name="bila" Canvas.Left="100" HorizontalAlignment="Left" Height="59" Margin="267,217,0,0" Stroke="Black" VerticalAlignment="Top" Width="63" Fill="Beige"/>
+
+        </Canvas>
     </Grid>
 </Window>
