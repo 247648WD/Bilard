@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Prezentacja.ViewModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,12 +21,13 @@ namespace Prezentacja
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
 
         private int boundariesRight = 680;
         private int boundariesLeft = 30;
-        private int boundariesTop = 70;
-        private int boundariesBottom = 365;
+        private int boundariesTop = 60;
+        private int boundariesBottom = 355;
         private int vx = 5;
         private List<Ellipse> ellipseList = new List<Ellipse>();
         private List<int> velos = new List<int>();
@@ -58,24 +60,12 @@ namespace Prezentacja
         private void add_bila(object sender, RoutedEventArgs e)
         {
             
-            double greenAreaWidth = 700;
-            double greenAreaHeight = 350;
-
-            
-            double leftBoundary = 30;
-            double topBoundary = 10;
-            double rightBoundary = leftBoundary + greenAreaWidth;
-            double bottomBoundary = topBoundary + greenAreaHeight;
-
-            
             Ellipse ellipse = new Ellipse();
             ellipse.Width = 50;
             ellipse.Height = 50;
             ellipse.Fill = Brushes.Black;
             ellipse.Stroke = Brushes.Black;
 
-            
-            
             Random random = new Random();
             int randomLeft = random.Next(40, 670);
             int randomTop = random.Next(60, 320);
