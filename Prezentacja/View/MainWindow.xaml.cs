@@ -22,10 +22,13 @@ namespace Prezentacja
             InitializeComponent();
         }
 
-        private int boundariesRight = 420;
-        private int boundariesLeft = -215;
+        private int boundariesRight = 680;
+        private int boundariesLeft = 30;
+        private int boundariesTop = 70;
+        private int boundariesBottom = 365;
         private int vx = 5;
         private List<Ellipse> ellipseList = new List<Ellipse>();
+        private List<int> velos = new List<int>();
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             DispatcherTimer timer = new DispatcherTimer();
@@ -36,41 +39,46 @@ namespace Prezentacja
 
         private void timerTicker(object sender, EventArgs e)
         {
+            for (int j = 0; j < ellipseList.Count; j++)
+            {
+                velos.Add(vx);
+            }
+
             for (int i = 0; i < ellipseList.Count; i++)
             {
-                double left = Canvas.GetLeft(ellipseList[i]);
-                Canvas.SetLeft(ellipseList[i], left + vx);
+                Canvas.SetLeft(ellipseList[i], Canvas.GetLeft(ellipseList[i]) + velos[i]);
+                Canvas.SetTop(ellipseList[i], Canvas.GetTop(ellipseList[i]) + velos[i]);
 
-                // Sprawdź, czy bila dotarła do granic obszaru zielonego
-                if (left <= boundariesLeft || left + ellipseList[i].Width >= boundariesRight)
+                if ((Canvas.GetLeft(ellipseList[i]) >= boundariesRight || Canvas.GetLeft(ellipseList[i]) <= boundariesLeft) || (Canvas.GetTop(ellipseList[i]) >= boundariesBottom || Canvas.GetTop(ellipseList[i]) <= boundariesTop))
                 {
-                    vx *= -1;
+                    velos[i] *= -1;
                 }
             }
         }
         private void add_bila(object sender, RoutedEventArgs e)
         {
-            // Pobierz wymiary obszaru zielonego
+            
             double greenAreaWidth = 700;
             double greenAreaHeight = 350;
 
-            // Oblicz granice obszaru zielonego
+            
             double leftBoundary = 30;
             double topBoundary = 10;
             double rightBoundary = leftBoundary + greenAreaWidth;
             double bottomBoundary = topBoundary + greenAreaHeight;
 
-            // Tworzenie nowej elipsy
+            
             Ellipse ellipse = new Ellipse();
-            ellipse.Width = 63;
-            ellipse.Height = 59;
-            ellipse.Fill = Brushes.Beige;
+            ellipse.Width = 50;
+            ellipse.Height = 50;
+            ellipse.Fill = Brushes.Black;
             ellipse.Stroke = Brushes.Black;
 
-            // Ustawienie losowej pozycji dla elipsy w obrębie obszaru zielonego
+            
+            
             Random random = new Random();
-            double randomLeft = random.NextDouble() * (rightBoundary - leftBoundary) + leftBoundary;
-            double randomTop = random.NextDouble() * (bottomBoundary - topBoundary) + topBoundary;
+            int randomLeft = random.Next(40, 670);
+            int randomTop = random.Next(60, 320);
             Canvas.SetLeft(ellipse, randomLeft);
             Canvas.SetTop(ellipse, randomTop);
             ellipseList.Add(ellipse);
