@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dane", "..\Dane\Dane.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logika", "..\Logika\Logika.csproj", "{E19EDB90-0B52-42C6-A583-C2F9C9D0C87E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prezentacja", "..\Prezentacja\Prezentacja.csproj", "{1AD5E6A0-7922-4DFB-91D0-40A2BE22A4C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prezentacja", "..\Prezentacja\Prezentacja.csproj", "{1AD5E6A0-7922-4DFB-91D0-40A2BE22A4C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

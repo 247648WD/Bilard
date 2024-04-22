@@ -42,8 +42,6 @@ public class Bila
                 SetY(GetY() + (vel * Math.Tan(dir) / Math.Sqrt(1 + Math.Tan(dir) * Math.Tan(dir))));
                 break;
         }
-
-
     }
 
 }

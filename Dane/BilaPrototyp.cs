@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Dane
 {
-    internal class BilaPrototyp
+    public abstract class BilaPrototyp
     {
-        private double posX;
-        private double posY;
-        private double mass;
-        private int size;
-        private int vel;
-        private int dir;
+        protected double posX;
+        protected double posY;
+        protected double mass;
+        protected int size;
+        protected int vel;
+        protected int dir;
 
         public BilaPrototyp Copy(double posX, double posY, double mass, int size, int vel, int dir)
         {
