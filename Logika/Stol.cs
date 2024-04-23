@@ -9,10 +9,10 @@ namespace Logika
 {
     internal abstract class Stol : StolPrototyp
     {
-        public int GetWidth() { return width; }
-        public int GetHeight() { return height; }
+        public int GetWidth() { return _width; }
+        public int GetHeight() { return _height; }
 
-        public void SetWidth(int width) { this.width = width; }
-        public void SetHeight(int height) {  this.height = height; }
+        public void SetWidth(int width) { this._width = width; }
+        public void SetHeight(int height) {  this._height = height; }
     }
 }

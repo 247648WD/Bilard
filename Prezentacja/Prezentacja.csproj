@@ -12,4 +12,8 @@
     <Folder Include="Model\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Dane\Dane.csproj" />
+  </ItemGroup>
+
 </Project>

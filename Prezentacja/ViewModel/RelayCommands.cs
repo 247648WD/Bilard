@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prezentacja.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,18 +8,33 @@ using System.Windows.Input;
 
 namespace Prezentacja.ViewModel
 {
-    public class RelayCommands : ICommand
+    public class RelayCommand : ICommand
     {
-        public event EventHandler? CanExecuteChanged;
+        private readonly Action _execute;
+        private readonly Func<bool> _canExecute;
+        private MainViewModel _mainViewModel;
 
-        public bool CanExecute(object? parameter)
+        public RelayCommand(Action execute, Func<bool> canExecute = null)
         {
-            throw new NotImplementedException();
+            _execute = execute;
+            _canExecute = canExecute;
         }
 
-        public void Execute(object? parameter)
+        public bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            return _canExecute == null || _canExecute();
+        }
+
+        public void Execute(object parameter)
+        {
+            _execute();
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
         }
     }
+
 }
