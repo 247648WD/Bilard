@@ -7,7 +7,7 @@ using Dane;
 
 namespace Logika
 {
-    internal abstract class Stol : StolPrototyp
+    public class Stol : StolPrototyp
     {
         public int GetWidth() { return _width; }
         public int GetHeight() { return _height; }

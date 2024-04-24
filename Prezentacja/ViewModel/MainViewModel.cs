@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-using Dane;
+using Logika;
 using Prezentacja.Model;
 
 namespace Prezentacja.ViewModel
@@ -17,7 +17,7 @@ namespace Prezentacja.ViewModel
     public class MainViewModel : INotifyPropertyChanged
     {
         private List<ModelBila> _balls;
-        private StolPrototyp _stockPrototyp = new StolPrototyp();
+        private Stol _stockPrototyp = new Stol();
 
         private int _height;
         public int Height
@@ -53,7 +53,7 @@ namespace Prezentacja.ViewModel
         public MainViewModel()
         {
             GenerateBallsCommand = new RelayCommand(GenerateBalls);
-            _stockPrototyp = _stockPrototyp.Copy(230, 220);
+            _stockPrototyp = (Stol)_stockPrototyp.Copy(230, 220);
             _width = _stockPrototyp._width;
             _height = _stockPrototyp._height;
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dane
 {
-    public class StolPrototyp
+    public abstract class StolPrototyp
     {
         public int _width;
         public int _height;
