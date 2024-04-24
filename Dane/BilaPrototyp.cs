@@ -15,7 +15,7 @@ namespace Dane
         protected int vel;
         protected int dir;
 
-        public BilaPrototyp Copy(double posX, double posY, double mass, int size, int vel, int dir)
+        public BilaPrototyp Copy(int posX, int posY, double mass, int size, int vel, int dir)
         {
             this.posX = posX;
             this.posY = posY;

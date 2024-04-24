@@ -6,7 +6,7 @@
     <Grid>
         
         <Canvas Name="canvas" Background="LightGray"/>
-        <Rectangle Fill="Green" Width="{Binding Width}" Height="{Binding Height}" />
+        <Rectangle Fill="Green" Width="{Binding Width}" Height="{Binding Height}" Stroke="Black"/>
         <Button Content="Generate Balls" Command="{Binding GenerateBallsCommand}" HorizontalAlignment="Left" Margin="10"/>
         <ItemsControl ItemsSource="{Binding Balls}">
             <ItemsControl.ItemsPanel>

@@ -20,7 +20,7 @@ namespace Prezentacja
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel(new BallService());
+            DataContext = new MainViewModel();
         }
     }
 }

@@ -10,13 +10,13 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Dane;
+using Prezentacja.Model;
 
 namespace Prezentacja.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private readonly BallService _ballService;
-        private List<Ball> _balls;
+        private List<ModelBila> _balls;
         private StolPrototyp _stockPrototyp = new StolPrototyp();
 
         private int _height;
@@ -39,7 +39,7 @@ namespace Prezentacja.ViewModel
             }
         }
 
-        public List<Ball> Balls
+        public List<ModelBila> Balls
         {
             get => _balls;
             set
@@ -50,9 +50,8 @@ namespace Prezentacja.ViewModel
         }
 
 
-        public MainViewModel(BallService ballService)
+        public MainViewModel()
         {
-            _ballService = ballService;
             GenerateBallsCommand = new RelayCommand(GenerateBalls);
             _stockPrototyp = _stockPrototyp.Copy(230, 220);
             _width = _stockPrototyp._width;
@@ -61,13 +60,15 @@ namespace Prezentacja.ViewModel
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            _ballService.MoveBalls(Balls, 485, 280, 315, 115);
+            ModelBila.UpdatePosition(Balls, ModelBila.GetBilas());
         }
 
         private void GenerateBalls()
         {
-            Balls = _ballService.GenerateBalls(10, 475, 325, 300, 150);
-
+            //Balls = _ballService.GenerateBalls(10, 475, 325, 300, 150);
+            
+            Balls = ModelBila.GetBalls();
+            ModelBila.Init(Balls);
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(30);
             timer.Tick += Timer_Tick;
