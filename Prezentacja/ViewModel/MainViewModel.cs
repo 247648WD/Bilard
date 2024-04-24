@@ -16,6 +16,7 @@ namespace Prezentacja.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private ModelBila _modelBila= new ModelBila();
         private List<ModelBila> _balls;
         private Stol _stockPrototyp = new Stol();
 
@@ -60,13 +61,13 @@ namespace Prezentacja.ViewModel
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            ModelBila.UpdatePosition(Balls, ModelBila.GetBilas());
+            _modelBila.UpdatePosition(Balls, _modelBila.GetBilas());
         }
 
         private void GenerateBalls()
         {
-            Balls = ModelBila.GetBalls();
-            ModelBila.Init(Balls);
+            Balls = _modelBila.GetBalls();
+            _modelBila.Init(Balls);
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(30);
             timer.Tick += Timer_Tick;
