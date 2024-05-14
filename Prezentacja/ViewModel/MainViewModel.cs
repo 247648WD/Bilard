@@ -65,8 +65,6 @@ namespace Prezentacja.ViewModel
 
         private void GenerateBalls()
         {
-            //Balls = _ballService.GenerateBalls(10, 475, 325, 300, 150);
-            
             Balls = ModelBila.GetBalls();
             ModelBila.Init(Balls);
             DispatcherTimer timer = new DispatcherTimer();

@@ -56,6 +56,7 @@ namespace Prezentacja.Model
             for (int i = 0; i < balls.Count; i++)
             {
                 model.Add(new ModelBila((int)balls[i].GetX(), (int)balls[i].GetY()));
+                // potem usunac konstruktor i bezposrednio do wlasciwosci X Y przekazac wartosci a nie przy tworzeniu noewj modelBila
             }
             return model;
         }
