@@ -9,6 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logika", "..\Logika\Logika.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prezentacja", "..\Prezentacja\Prezentacja.csproj", "{1AD5E6A0-7922-4DFB-91D0-40A2BE22A4C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "TestDane\Test.csproj", "{8FCBAD22-3257-4F75-AC2B-25BC497CF723}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E19EDB90-0B52-42C6-A583-C2F9C9D0C87E} = {E19EDB90-0B52-42C6-A583-C2F9C9D0C87E}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +32,10 @@ Global
 		{1AD5E6A0-7922-4DFB-91D0-40A2BE22A4C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AD5E6A0-7922-4DFB-91D0-40A2BE22A4C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AD5E6A0-7922-4DFB-91D0-40A2BE22A4C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FCBAD22-3257-4F75-AC2B-25BC497CF723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FCBAD22-3257-4F75-AC2B-25BC497CF723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FCBAD22-3257-4F75-AC2B-25BC497CF723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FCBAD22-3257-4F75-AC2B-25BC497CF723}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

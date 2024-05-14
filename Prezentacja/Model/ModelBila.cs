@@ -13,7 +13,7 @@ namespace Prezentacja.Model
     {
         private int _x;
         private int _y;
-        private static List<Bila> _bilaList = new List<Bila>();
+        private List<Bila> _bilaList = new List<Bila>();
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -22,7 +22,7 @@ namespace Prezentacja.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public static List<Bila> GetBilas() { return _bilaList; }
+        public List<Bila> GetBilas() { return _bilaList; }
 
         public int X
         {
@@ -43,25 +43,22 @@ namespace Prezentacja.Model
                 OnPropertyChanged(nameof(Y));
             }
         }
-        public ModelBila(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
 
-        public static List<ModelBila> GetBalls()
+        public List<ModelBila> GetBalls()
         {
             List<ModelBila> model = new List<ModelBila>();
             List<Bila> balls = Bila.GenerateBalls(10, 475, 325, 300, 150);
             for (int i = 0; i < balls.Count; i++)
             {
-                model.Add(new ModelBila((int)balls[i].GetX(), (int)balls[i].GetY()));
                 // potem usunac konstruktor i bezposrednio do wlasciwosci X Y przekazac wartosci a nie przy tworzeniu noewj modelBila
+                model.Add(new ModelBila());
+                model[i].X = (int)balls[i].GetX();
+                model[i].Y = (int)balls[i].GetY();
             }
             return model;
         }
 
-        public static void Init(List<ModelBila> bilas)
+        public void Init(List<ModelBila> bilas)
         {
             for (int i = 0; i < bilas.Count; i++)
             {
@@ -69,7 +66,7 @@ namespace Prezentacja.Model
             }
         }
 
-        public static void UpdatePosition(List<ModelBila> bilas, List<Bila> balls)
+        public void UpdatePosition(List<ModelBila> bilas, List<Bila> balls)
         {   balls = Bila.MoveBalls(balls, 485, 280, 315, 115);
             for(int i = 0;i < bilas.Count; i++)
             {

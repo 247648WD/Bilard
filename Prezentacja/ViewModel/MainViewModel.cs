@@ -9,15 +9,16 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-using Dane;
+using Logika;
 using Prezentacja.Model;
 
 namespace Prezentacja.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private ModelBila _modelBila= new ModelBila();
         private List<ModelBila> _balls;
-        private StolPrototyp _stockPrototyp = new StolPrototyp();
+        private Stol _stockPrototyp = new Stol();
 
         private int _height;
         public int Height
@@ -53,20 +54,20 @@ namespace Prezentacja.ViewModel
         public MainViewModel()
         {
             GenerateBallsCommand = new RelayCommand(GenerateBalls);
-            _stockPrototyp = _stockPrototyp.Copy(230, 220);
+            _stockPrototyp = (Stol)_stockPrototyp.Copy(230, 220);
             _width = _stockPrototyp._width;
             _height = _stockPrototyp._height;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            ModelBila.UpdatePosition(Balls, ModelBila.GetBilas());
+            _modelBila.UpdatePosition(Balls, _modelBila.GetBilas());
         }
 
         private void GenerateBalls()
         {
-            Balls = ModelBila.GetBalls();
-            ModelBila.Init(Balls);
+            Balls = _modelBila.GetBalls();
+            _modelBila.Init(Balls);
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(30);
             timer.Tick += Timer_Tick;
