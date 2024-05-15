@@ -3,13 +3,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logika;
 using System.Security.Cryptography;
 using System.Runtime.Intrinsics.X86;
+using System.Collections.Specialized;
 
 namespace Test
 {
     [TestClass]
     public class TestDane
     {
-        Bila b1 = new Bila(1, 1, 1, 1, 1, 0);
+        Bila b1 = new Bila();
         Stol s1 = new Stol();
 
         [TestMethod]
@@ -36,8 +37,9 @@ namespace Test
     [TestClass]
     public class TestLogika
     {
-        Bila b2 = new Bila(2, 1, 1, 1, 1, 0);
-        Bila b3 = new Bila(1, 1, 1, 1, 1, 0);
+        Bila b2 = new Bila();
+        Bila b3 = new Bila();
+        Bila b4 = new Bila();
         List<Bila> listMove = new List<Bila>();
         List<Bila> listGenerate = new List<Bila>();
 
@@ -45,19 +47,21 @@ namespace Test
         [TestMethod]
         public void BilaMoveTest()
         {
+            b2 = (Bila)b2.Copy(2, 1, 1, 1, 1, 0);
+            b3 = (Bila)b3.Copy(1, 1, 1, 1, 1, 0);
             listMove.Add(b2);
             listMove.Add(b3);
-            listMove = Bila.MoveBalls(listMove, 3, 0, 4, 0);
+            b2.MoveBalls(listMove, 3, 0, 4, 0);
             Assert.AreEqual(3, b2.GetX());
             Assert.AreEqual(2, b3.GetX());
-            listMove = Bila.MoveBalls(listMove, 3, 0, 4, 0);
+            b2.MoveBalls(listMove, 3, 0, 4, 0);
             Assert.AreEqual(2, b2.GetX());
             Assert.AreEqual(3, b3.GetX());
         }
 
         public void BilaGenerateTest()
         {
-            listGenerate = Bila.GenerateBalls(3, 5, 1, 3, 2);
+            listGenerate = b4.GenerateBalls(3, 5, 1, 3, 2);
             Assert.IsTrue(listGenerate[0].GetX() < 5 && listGenerate[0].GetX() >= 1);
             Assert.IsTrue(listGenerate[0].GetY() < 3 && listGenerate[0].GetY() >= 2);
             Assert.IsTrue(listGenerate[1].GetX() < 5 && listGenerate[0].GetX() >= 1);

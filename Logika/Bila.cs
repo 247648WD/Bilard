@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Dane;
@@ -15,6 +17,8 @@ namespace Logika
         public int GetSize() { return size; }
         public int GetVel() { return vel; }
         public int GetDir() { return dir; }
+
+        public Bila() { }
 
         public Bila(double posX, double posY, double mass, int size, int vel, int dir)
         {
@@ -50,9 +54,24 @@ namespace Logika
                     SetY(GetY() + (vel * Math.Tan(dir) / Math.Sqrt(1 + Math.Tan(dir) * Math.Tan(dir))));
                     break;
             }
+
+            /*if (dir == 361) //dodać warunek na zderzenia
+            {
+                if (dir == 0) //jeżeli zderzenie jest na jednej płaszczyźnie
+                {
+                    SetY(GetY() + vel);
+                } 
+                else
+                {
+                    int collDir = 180; //Math.Atan((y1 - y2) / (x1 - x2))
+                    double m2 = 1; //masa drugiego
+                    int newDir = (int)Math.Round(Math.Atan(m2 * Math.Sin(collDir) / (mass + m2) * Math.Sin(collDir)));
+                    SetDir(newDir);
+                }
+            }*/
         }
 
-        public static List<Bila> GenerateBalls(int count, int maxX, int minX, int maxY, int minY)
+        public List<Bila> GenerateBalls(int count, int maxX, int minX, int maxY, int minY)
         {
             Random _random = new Random();
             var balls = new List<Bila>();
@@ -60,12 +79,13 @@ namespace Logika
             {
                 int x = _random.Next(minX, maxX);
                 int y = _random.Next(minY, maxY);
-                balls.Add(new Bila(x, y,0,0,0,0));
+                balls.Add(new Bila());
+                balls[i].Copy(x, y, 0, 0, 0, 0);
             }
             return balls;
         }
 
-        public static List<Bila> MoveBalls(List<Bila> balls, int maxX, int minX, int maxY, int minY)
+        public List<Bila> MoveBalls(List<Bila> balls, int maxX, int minX, int maxY, int minY)
         {
             for (int i = 0; i < balls.Count; i++)
             {
@@ -81,6 +101,10 @@ namespace Logika
 
                 balls[i].SetX(balls[i].GetX() + balls[i].GetVel());
                 if (balls[i].GetX() <= minX || balls[i].GetX() >= maxX)
+                {
+                    balls[i].SetVel(balls[i].GetVel() * (-1));
+                }
+                if (balls[i].GetY() <= minY || balls[i].GetY() >= maxY)
                 {
                     balls[i].SetVel(balls[i].GetVel() * (-1));
                 }

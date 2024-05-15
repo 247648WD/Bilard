@@ -46,8 +46,9 @@ namespace Prezentacja.Model
 
         public List<ModelBila> GetBalls()
         {
+            Bila temp = new Bila();
             List<ModelBila> model = new List<ModelBila>();
-            List<Bila> balls = Bila.GenerateBalls(10, 475, 325, 300, 150);
+            List<Bila> balls = temp.GenerateBalls(10, 475, 325, 300, 150);
             for (int i = 0; i < balls.Count; i++)
             {
                 // potem usunac konstruktor i bezposrednio do wlasciwosci X Y przekazac wartosci a nie przy tworzeniu noewj modelBila
@@ -67,7 +68,9 @@ namespace Prezentacja.Model
         }
 
         public void UpdatePosition(List<ModelBila> bilas, List<Bila> balls)
-        {   balls = Bila.MoveBalls(balls, 485, 280, 315, 115);
+        {
+            Bila temp = new Bila();
+            balls = temp.MoveBalls(balls, 485, 280, 315, 115);
             for(int i = 0;i < bilas.Count; i++)
             {
                 bilas[i].X = (int)balls[i].GetX();
