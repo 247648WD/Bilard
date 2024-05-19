@@ -55,26 +55,26 @@ namespace Prezentacja.ViewModel
         {
             GenerateBallsCommand = new RelayCommand(GenerateBalls);
             _stockPrototyp = (Stol)_stockPrototyp.Copy(230, 220);
-            _width = _stockPrototyp._width;
-            _height = _stockPrototyp._height;
+            Width = _stockPrototyp._width;
+            Height = _stockPrototyp._height;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            _modelBila.UpdatePosition(Balls, _modelBila.GetBilas());
+            _modelBila.UpdatePosition(Balls);
         }
 
-        private void GenerateBalls()
+        private void GenerateBalls()  // METODA ONCLICK DLA PRZYCISKU
         {
-            Balls = _modelBila.GetBalls();
-            _modelBila.Init(Balls);
+            Balls = _modelBila.InitList(5);  // DODAC TEXTFIELD GDZIE UZYTKOWNIK BEDZIE PODAWAL ILOSC BILI DO WYGENEROWANIA
+            //_modelBila.Init(Balls);
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(30);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
 
-        public ICommand GenerateBallsCommand { get; }
+        public ICommand GenerateBallsCommand { get; }  // KOMENDA DLA PRZYCISKU 
 
         public event PropertyChangedEventHandler PropertyChanged;
 

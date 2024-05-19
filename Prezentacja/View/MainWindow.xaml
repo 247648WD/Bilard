@@ -16,7 +16,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Ellipse Width="20" Height="20" Fill="Black">
+                    <Ellipse Width="20" Height="20" Fill="Red">
                         <Ellipse.RenderTransform>
                             <TranslateTransform X="{Binding X}" Y="{Binding Y}"/>
                         </Ellipse.RenderTransform>

@@ -71,6 +71,23 @@ namespace Logika
             }*/
         }
 
+        public Bila GenerateBall(int maxX, int minX, int maxY, int minY)
+        {
+            Random _random = new Random();
+            return (Bila)new Bila().Copy(_random.Next(minX, maxX), _random.Next(minY, maxY), 0, 0, 5, 0);  // TUTAJ ZMIANA PREDKOSCI
+        }
+
+        public Bila MoveBall(Bila ball, int maxX, int minX, int maxY, int minY)
+        {
+            ball.SetX(ball.GetX() + ball.GetVel());
+            if (ball.GetX() <= minX || ball.GetX() >= maxX)
+            {
+                ball.SetVel(ball.GetVel() * (-1));
+            }
+            return ball;
+        }
+
+        /*
         public List<Bila> GenerateBalls(int count, int maxX, int minX, int maxY, int minY)
         {
             Random _random = new Random();
@@ -83,21 +100,13 @@ namespace Logika
                 balls[i].Copy(x, y, 0, 0, 0, 0);
             }
             return balls;
-        }
+        }*/
 
+        /*
         public List<Bila> MoveBalls(List<Bila> balls, int maxX, int minX, int maxY, int minY)
         {
             for (int i = 0; i < balls.Count; i++)
             {
-                /*Przykładowy kod ruchu kul (dla uproszczenia)
-                ball.X += _random.Next(-4, 5); // Losowy ruch poziomy
-                ball.Y += _random.Next(-4, 5); // Losowy ruch pionowy
-
-                // Odbijanie się od ścian
-                if (ball.X < minX || ball.X > maxX)
-                    ball.X = Math.Clamp(ball.X, 0, maxX);
-                if (ball.Y < minY || ball.Y > maxY)
-                    ball.Y = Math.Clamp(ball.Y, 0, maxY);*/
 
                 balls[i].SetX(balls[i].GetX() + balls[i].GetVel());
                 if (balls[i].GetX() <= minX || balls[i].GetX() >= maxX)
@@ -110,6 +119,6 @@ namespace Logika
                 }
             }
             return balls;
-        }
+        }*/
     }
 }

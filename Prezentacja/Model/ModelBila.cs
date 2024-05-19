@@ -44,8 +44,34 @@ namespace Prezentacja.Model
             }
         }
 
+        public List<ModelBila> InitList(int size)
+        {
+            Bila temp = new Bila();
+            List<ModelBila> model = new List<ModelBila>();
+            for (int i = 0; i < size; i++)
+            {
+                _bilaList.Add(temp.GenerateBall(475, 325, 300, 150));  // ROZMIARY GDZIE MOZE SPAWNOWAC SIE BILA - TROCHE MNIEJSZE NIZ STOL
+                model.Add(new ModelBila());
+                model[i].X = (int)_bilaList[i].GetX();
+                model[i].Y = (int)_bilaList[i].GetY();
+            }
+            return model;
+        }
+
+        public void UpdatePosition(List<ModelBila> balls)
+        {
+            Bila temp = new Bila();
+            for (int i = 0; i < balls.Count; i++)
+            {
+                temp = temp.MoveBall(_bilaList[i], 485, 280, 315, 115);  // TRZEBA UZALEZNIC ROZMIARY MAX I MIN OD ROZMIARU STOLU
+                balls[i].X = (int)temp.GetX();
+            }
+        }
+
+        /*
         public List<ModelBila> GetBalls()
         {
+            // PRZEKSZTALCENIE BILI NA MODELBILA 
             Bila temp = new Bila();
             List<ModelBila> model = new List<ModelBila>();
             List<Bila> balls = temp.GenerateBalls(10, 475, 325, 300, 150);
@@ -58,23 +84,25 @@ namespace Prezentacja.Model
             }
             return model;
         }
-
+        
         public void Init(List<ModelBila> bilas)
         {
+            // 
             for (int i = 0; i < bilas.Count; i++)
             {
                 _bilaList.Add(new Bila((double)bilas[i].X, (double)bilas[i].Y, 0, 0, 5, 0));
             }
-        }
+        }*/
 
+        /*
         public void UpdatePosition(List<ModelBila> bilas, List<Bila> balls)
         {
             Bila temp = new Bila();
-            balls = temp.MoveBalls(balls, 485, 280, 315, 115);
-            for(int i = 0;i < bilas.Count; i++)
+            balls = temp.MoveBalls(balls, 485, 280, 315, 115);  
+            for(int i = 0; i < bilas.Count; i++)
             {
                 bilas[i].X = (int)balls[i].GetX();
             }
-        }
+        }*/
     }
 }
