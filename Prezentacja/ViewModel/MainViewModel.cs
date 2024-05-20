@@ -17,6 +17,7 @@ namespace Prezentacja.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private ObserwatorKolizji obs;
         private Bila _bila = new Bila();
         private List<Bila> _balls;
         private Stol _stockPrototyp = new Stol();
@@ -78,10 +79,13 @@ namespace Prezentacja.ViewModel
 
         private void GenerateBalls()  // METODA ONCLICK DLA PRZYCISKU
         {
+            obs = new ObserwatorKolizji();
+            Balls.Clear();
             for (int i = 0; i < Int32.Parse(QuantityValue); i++)
             {
                 Bila temp = _bila.GenerateBall(475, 325, 300, 150);
                 Balls.Add(temp);
+                obs.AddBilas(temp);
             }
         }
 

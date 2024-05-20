@@ -116,7 +116,7 @@ namespace Logika
         public Bila GenerateBall(int maxX, int minX, int maxY, int minY)
         {
             Random _random = new Random();
-            return new Bila(_random.Next(minX, maxX), _random.Next(minY, maxY), 2, 2, _random.Next(-5, 5), _random.Next(-5, 5));
+            return new Bila(_random.Next(minX, maxX), _random.Next(minY, maxY), 50, 50, _random.Next(-5, 5), _random.Next(-5, 5));
             //return (Bila)new Bila().Copy(_random.Next(minX, maxX), _random.Next(minY, maxY), 0, 0, 5, 0);  // TUTAJ ZMIANA PREDKOSCI
         }
 
@@ -132,6 +132,12 @@ namespace Logika
             return ball;
         }*/
 
+        public void ChangeVectors() // odpowiednio modyfikować wektory po zderzeniu
+        {
+            this.SetVecX(-1 * this.GetVecX());
+            this.SetVecY(-1 * this.GetVecY());
+        }
+
         public void Move(int maxX, int minX, int maxY, int minY)
         {
             try
@@ -140,19 +146,19 @@ namespace Logika
                 {
                     if (this.GetX() <= minX)
                     {
-                        this.SetVecX(-1 * GetVecX());
+                        this.SetVecX(-1 * this.GetVecX());
                     }
                     if (this.GetX() >= maxX)
                     {
-                        this.SetVecX(-1 * GetVecX());
+                        this.SetVecX(-1 * this.GetVecX());
                     }
                     if (this.GetY() <= minY)
                     {
-                        this.SetVecY(-1 * GetVecY());
+                        this.SetVecY(-1 * this.GetVecY());
                     }
                     if (this.GetY() >= maxY)
                     {
-                        this.SetVecY(-1 * GetVecY());
+                        this.SetVecY(-1 * this.GetVecY());
                     }
                     /*//this.SetX(this.GetX() + this.GetVel());
                     /*if (this.GetX() <= minX || this.GetX() >= maxX)
