@@ -71,9 +71,9 @@ namespace Prezentacja.Model
         public void KeepMoving(int size)
         {
             Bila temp = new Bila();
-            for (int i = 0;i < size;i++)
+            for (int i = 0; i < size; i++)
             {
-                _bilaList[i].StartThread(_bilaList[i], 485, 280, 315, 115);
+                //_bilaList[i].StartThread(_bilaList[i], 485, 280, 315, 115);
             }
         }
     }

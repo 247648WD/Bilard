@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Numerics;
@@ -9,11 +10,40 @@ using Dane;
 
 namespace Logika
 {
-    public class Bila : BilaPrototyp
+    public class Bila : BilaPrototyp, INotifyPropertyChanged
     {
         private Thread thread;
-        public double GetX() { return posX; }
-        public double GetY() { return posY; }
+        private int _x;
+        private int _y;
+
+        public int X
+        {
+            get => _x;
+            set
+            {
+                _x = value;
+                OnPropertyChanged(nameof(X));
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public int Y
+        {
+            get => _y;
+            set
+            {
+                _y = value;
+                OnPropertyChanged(nameof(Y));
+            }
+        }
+        public double GetX() { return X; }
+        public double GetY() { return Y; }
         public double GetMass() { return mass; }
         public int GetSize() { return size; }
         public int GetVel() { return vel; }
@@ -23,21 +53,23 @@ namespace Logika
 
         public Bila(double posX, double posY, double mass, int size, int vel, int dir)
         {
-            this.posX = posX;
-            this.posY = posY;
+            this.X = (int)posX;
+            this.Y = (int)posY;
             this.mass = mass;
             this.size = size;
             this.vel = vel;
             this.dir = dir;
+            this.thread = new Thread(() => Move(485, 280, 315, 115));
+            thread.Start();
         }
-        
-        private void SetX(double x) { this.posX = x; }
-        private void SetY(double y) { this.posY = y; }
+
+        private void SetX(double x) { this.X = (int)x; }
+        private void SetY(double y) { this.Y = (int)y; }
         private void SetMass(double mass) { this.mass = mass; }
         private void SetSize(int size) { this.size = size; }
         private void SetVel(int vel) { this.vel = vel; }
         private void SetDir(int dir) { this.dir = dir; }
-        
+
         public void UpdatePos()
         {
             switch (dir)
@@ -75,19 +107,21 @@ namespace Logika
         public Bila GenerateBall(int maxX, int minX, int maxY, int minY)
         {
             Random _random = new Random();
-            return (Bila)new Bila().Copy(_random.Next(minX, maxX), _random.Next(minY, maxY), 0, 0, 5, 0);  // TUTAJ ZMIANA PREDKOSCI
+            return new Bila(_random.Next(minX, maxX), _random.Next(minY, maxY), 0, 0, 5, 0);
+            //return (Bila)new Bila().Copy(_random.Next(minX, maxX), _random.Next(minY, maxY), 0, 0, 5, 0);  // TUTAJ ZMIANA PREDKOSCI
         }
 
+        /*
         public Bila MoveBall(Bila ball, int maxX, int minX, int maxY, int minY)
         {
-            
+
             ball.SetX(ball.GetX() + ball.GetVel());
             if (ball.GetX() <= minX || ball.GetX() >= maxX)
             {
                 ball.SetVel(ball.GetVel() * (-1));
             }
             return ball;
-        }
+        }*/
 
         public void Move(int maxX, int minX, int maxY, int minY)
         {
@@ -110,9 +144,9 @@ namespace Logika
             }
         }
 
-        public void StartThread(Bila ball, int maxX, int minX, int maxY, int minY)
+        public void StartThread()
         {
-            thread = new Thread(() => Move(maxX, minX, maxY, minY));
+            //thread = new Thread(() => Move(maxX, minX, maxY, minY));
             thread.Start();
         }
     }
