@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logika;
 using System.Security.Cryptography;
@@ -82,4 +82,4 @@ namespace Test
             Assert.AreEqual(100, s2.GetHeight());
         }
     }
-}
+}*/

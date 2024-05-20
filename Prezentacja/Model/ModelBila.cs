@@ -63,8 +63,9 @@ namespace Prezentacja.Model
             Bila temp = new Bila();
             for (int i = 0; i < balls.Count; i++)
             {
-                temp = temp.MoveBall(_bilaList[i], 485, 280, 315, 115);  // TRZEBA UZALEZNIC ROZMIARY MAX I MIN OD ROZMIARU STOLU
+                //temp = temp.MoveBall(_bilaList[i], 485, 280, 315, 115);  // TRZEBA UZALEZNIC ROZMIARY MAX I MIN OD ROZMIARU STOLU
                 balls[i].X = (int)temp.GetX();
+                balls[i].Y = (int)temp.GetY();
             }
         }
 

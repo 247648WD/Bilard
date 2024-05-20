@@ -12,15 +12,17 @@ namespace Dane
         protected double posY;
         protected double mass;
         protected int size;
-        protected int vel;
-        protected int dir;
+        //protected int vel;
+        //protected int dir;
+        protected double vecX;
+        protected double vecY;
 
-        public BilaPrototyp Copy(int posX, int posY, double mass, int size, int vel, int dir)
+        public BilaPrototyp Copy(int posX, int posY, double mass, int size, double vecX, double vecY)
         {
             this.posX = posX;
             this.posY = posY;
-            this.vel = vel;
-            this.dir = dir;
+            this.vecX = vecX;
+            this.vecY = vecY;
             this.mass = mass;
             this.size = size;
             return this;
