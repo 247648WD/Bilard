@@ -11,6 +11,7 @@ namespace Logika
 {
     public class Bila : BilaPrototyp
     {
+        private Thread thread;
         public double GetX() { return posX; }
         public double GetY() { return posY; }
         public double GetMass() { return mass; }
@@ -79,6 +80,7 @@ namespace Logika
 
         public Bila MoveBall(Bila ball, int maxX, int minX, int maxY, int minY)
         {
+            
             ball.SetX(ball.GetX() + ball.GetVel());
             if (ball.GetX() <= minX || ball.GetX() >= maxX)
             {
@@ -87,38 +89,31 @@ namespace Logika
             return ball;
         }
 
-        /*
-        public List<Bila> GenerateBalls(int count, int maxX, int minX, int maxY, int minY)
+        public void Move(int maxX, int minX, int maxY, int minY)
         {
-            Random _random = new Random();
-            var balls = new List<Bila>();
-            for (int i = 0; i < count; i++)
+            try
             {
-                int x = _random.Next(minX, maxX);
-                int y = _random.Next(minY, maxY);
-                balls.Add(new Bila());
-                balls[i].Copy(x, y, 0, 0, 0, 0);
-            }
-            return balls;
-        }*/
-
-        /*
-        public List<Bila> MoveBalls(List<Bila> balls, int maxX, int minX, int maxY, int minY)
-        {
-            for (int i = 0; i < balls.Count; i++)
-            {
-
-                balls[i].SetX(balls[i].GetX() + balls[i].GetVel());
-                if (balls[i].GetX() <= minX || balls[i].GetX() >= maxX)
+                while (true)
                 {
-                    balls[i].SetVel(balls[i].GetVel() * (-1));
-                }
-                if (balls[i].GetY() <= minY || balls[i].GetY() >= maxY)
-                {
-                    balls[i].SetVel(balls[i].GetVel() * (-1));
+                    this.SetX(this.GetX() + this.GetVel());
+                    if (this.GetX() <= minX || this.GetX() >= maxX)
+                    {
+                        this.SetVel(this.GetVel() * (-1));
+                    }
+                    // Tutaj możesz dodać więcej logiki, na przykład obsługę kolizji
+                    Thread.Sleep(30); // Poczekaj 100 milisekund przed kolejnym ruchem
                 }
             }
-            return balls;
-        }*/
+            catch (ThreadAbortException)
+            {
+                // Wątek został zatrzymany
+            }
+        }
+
+        public void StartThread(Bila ball, int maxX, int minX, int maxY, int minY)
+        {
+            thread = new Thread(() => Move(maxX, minX, maxY, minY));
+            thread.Start();
+        }
     }
 }

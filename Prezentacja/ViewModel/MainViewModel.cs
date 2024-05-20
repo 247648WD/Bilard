@@ -19,6 +19,16 @@ namespace Prezentacja.ViewModel
         private ModelBila _modelBila= new ModelBila();
         private List<ModelBila> _balls;
         private Stol _stockPrototyp = new Stol();
+        private string _quantityValue;
+        public string QuantityValue
+        {
+            get { return _quantityValue; }
+            set
+            {
+                _quantityValue = value;
+                OnPropertyChanged(nameof(QuantityValue));
+            }
+        }
 
         private int _height;
         public int Height
@@ -66,12 +76,12 @@ namespace Prezentacja.ViewModel
 
         private void GenerateBalls()  // METODA ONCLICK DLA PRZYCISKU
         {
-            Balls = _modelBila.InitList(5);  // DODAC TEXTFIELD GDZIE UZYTKOWNIK BEDZIE PODAWAL ILOSC BILI DO WYGENEROWANIA
-            //_modelBila.Init(Balls);
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(30);
-            timer.Tick += Timer_Tick;
-            timer.Start();
+            Balls = _modelBila.InitList(Int32.Parse(QuantityValue));
+            _modelBila.KeepMoving(Int32.Parse(QuantityValue));
+            //DispatcherTimer timer = new DispatcherTimer();
+            //timer.Interval = TimeSpan.FromMilliseconds(30);
+            //timer.Tick += Timer_Tick;
+            //timer.Start();
         }
 
         public ICommand GenerateBallsCommand { get; }  // KOMENDA DLA PRZYCISKU 

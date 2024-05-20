@@ -68,41 +68,13 @@ namespace Prezentacja.Model
             }
         }
 
-        /*
-        public List<ModelBila> GetBalls()
+        public void KeepMoving(int size)
         {
-            // PRZEKSZTALCENIE BILI NA MODELBILA 
             Bila temp = new Bila();
-            List<ModelBila> model = new List<ModelBila>();
-            List<Bila> balls = temp.GenerateBalls(10, 475, 325, 300, 150);
-            for (int i = 0; i < balls.Count; i++)
+            for (int i = 0;i < size;i++)
             {
-                // potem usunac konstruktor i bezposrednio do wlasciwosci X Y przekazac wartosci a nie przy tworzeniu noewj modelBila
-                model.Add(new ModelBila());
-                model[i].X = (int)balls[i].GetX();
-                model[i].Y = (int)balls[i].GetY();
+                _bilaList[i].StartThread(_bilaList[i], 485, 280, 315, 115);
             }
-            return model;
         }
-        
-        public void Init(List<ModelBila> bilas)
-        {
-            // 
-            for (int i = 0; i < bilas.Count; i++)
-            {
-                _bilaList.Add(new Bila((double)bilas[i].X, (double)bilas[i].Y, 0, 0, 5, 0));
-            }
-        }*/
-
-        /*
-        public void UpdatePosition(List<ModelBila> bilas, List<Bila> balls)
-        {
-            Bila temp = new Bila();
-            balls = temp.MoveBalls(balls, 485, 280, 315, 115);  
-            for(int i = 0; i < bilas.Count; i++)
-            {
-                bilas[i].X = (int)balls[i].GetX();
-            }
-        }*/
     }
 }
