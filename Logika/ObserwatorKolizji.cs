@@ -32,7 +32,7 @@ namespace Logika
             double x = Math.Abs(bilas[i].GetX() - bilas[j].GetX());
             return (int)(Math.Asin(Math.Sin(y / x)) * 180 / Math.PI);
         }
-
+        
         public void CheckBilas()
         {
             try
@@ -49,10 +49,16 @@ namespace Logika
                                 double dy = bilas[i].GetY() - bilas[j].GetY();
                                 double distance = Math.Sqrt((dx * dx) + (dy * dy));
 
-                                if (distance <= (bilas[i].GetSize() / 2 + bilas[j].GetSize() / 2))
+                                if (distance >= (bilas[i].GetSize() / 2 + bilas[j].GetSize() / 2))
                                 {
-                                    bilas[i].ChangeVectors(bilas[j].GetMass(), bilas[j].GetThisVel(), bilas[j].GetThisDir(), this.GetAngle(i, j));
-                                    bilas[j].ChangeVectors(bilas[i].GetMass(), bilas[i].GetThisVel(), bilas[i].GetThisDir(), this.GetAngle(j, i));
+                                    double m1 = bilas[i].GetMass();
+                                    double vx1 = bilas[i].GetVecX();
+                                    double vy1 = bilas[i].GetVecY();
+                                    double m2 = bilas[j].GetMass();
+                                    double vx2 = bilas[j].GetVecX();
+                                    double vy2 = bilas[j].GetVecY();
+                                    bilas[i].ChangeVectors(m1, vx1, vy1, m2, vx2, vy2);
+                                    bilas[j].ChangeVectors(m1, vx1, vy1, m2, vx2, vy2);
                                 }
                             }
                         }
