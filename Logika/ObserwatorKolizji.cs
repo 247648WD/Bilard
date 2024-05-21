@@ -49,7 +49,7 @@ namespace Logika
                                 double dy = bilas[i].GetY() - bilas[j].GetY();
                                 double distance = Math.Sqrt((dx * dx) + (dy * dy));
 
-                                if (distance >= (bilas[i].GetSize() / 2 + bilas[j].GetSize() / 2))
+                                if (distance <= (bilas[i].GetSize() / 2 + bilas[j].GetSize() / 2))
                                 {
                                     double m1 = bilas[i].GetMass();
                                     double vx1 = bilas[i].GetVecX();
@@ -58,7 +58,7 @@ namespace Logika
                                     double vx2 = bilas[j].GetVecX();
                                     double vy2 = bilas[j].GetVecY();
                                     bilas[i].ChangeVectors(m1, vx1, vy1, m2, vx2, vy2);
-                                    bilas[j].ChangeVectors(m1, vx1, vy1, m2, vx2, vy2);
+                                    bilas[j].ChangeVectors(m2, vx2, vy2, m1, vx1, vy1);
                                 }
                             }
                         }
