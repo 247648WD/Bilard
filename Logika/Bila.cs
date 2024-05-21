@@ -116,21 +116,9 @@ namespace Logika
         public Bila GenerateBall(int maxX, int minX, int maxY, int minY)
         {
             Random _random = new Random();
-            return new Bila(_random.Next(minX, maxX), _random.Next(minY, maxY), 50, 50, _random.Next(-5, 5), _random.Next(-5, 5));
+            return new Bila(_random.Next(minX, maxX), _random.Next(minY, maxY), 25, 25, _random.Next(-5, 5), _random.Next(-5, 5));
             //return (Bila)new Bila().Copy(_random.Next(minX, maxX), _random.Next(minY, maxY), 0, 0, 5, 0);  // TUTAJ ZMIANA PREDKOSCI
         }
-
-        /*
-        public Bila MoveBall(Bila ball, int maxX, int minX, int maxY, int minY)
-        {
-
-            ball.SetX(ball.GetX() + ball.GetVel());
-            if (ball.GetX() <= minX || ball.GetX() >= maxX)
-            {
-                ball.SetVel(ball.GetVel() * (-1));
-            }
-            return ball;
-        }*/
 
         public void ChangeVectors() // odpowiednio modyfikować wektory po zderzeniu
         {
@@ -232,22 +220,15 @@ namespace Logika
                     }
                     this.UpdatePos();
                     int val = GetDir();*/
-                    // Tutaj możesz dodać więcej logiki, na przykład obsługę kolizji
                     SetX(this.GetX() + this.GetVecX());
                     SetY(this.GetY() + this.GetVecY());
-                    Thread.Sleep(30); // Poczekaj 100 milisekund przed kolejnym ruchem
+                    Thread.Sleep(30);
                 }
             }
             catch (ThreadAbortException)
             {
-                // Wątek został zatrzymany
+                
             }
-        }
-
-        public void StartThread()
-        {
-            //thread = new Thread(() => Move(maxX, minX, maxY, minY));
-            thread.Start();
         }
     }
 }

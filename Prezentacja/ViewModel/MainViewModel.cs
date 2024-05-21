@@ -19,7 +19,6 @@ namespace Prezentacja.ViewModel
     {
         private ObserwatorKolizji obs;
         private Bila _bila = new Bila();
-        private List<Bila> _balls;
         private Stol _stockPrototyp = new Stol();
         private string _quantityValue;
         public string QuantityValue

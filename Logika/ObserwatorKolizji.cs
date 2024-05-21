@@ -27,17 +27,32 @@ namespace Logika
 
         public void CheckBilas()
         {
-            for (int i = 0; i < bilas.Count - 1; i++)
+            try
             {
-                for(int j = i + 1; j < bilas.Count; j++) {
-                    //if (Math.Pow(bilas[i].GetSize() / 2 + bilas[j].GetSize() / 2, 2) >= Math.Pow(bilas[i].GetX() - bilas[j].GetX(), 2) + Math.Pow(bilas[i].GetY() - bilas[j].GetY(), 2)) {
-                    if (i == j + 1) { 
-                        bilas[i].ChangeVectors();
-                        bilas[j].ChangeVectors();
+                while (true)
+                {
+                    for (int i = 0; i < bilas.Count - 1; i++)
+                    {
+                        for (int j = i + 1; j < bilas.Count; j++)
+                        {
+                            double dx = bilas[i].GetX() - bilas[j].GetX();
+                            double dy = bilas[i].GetY() - bilas[j].GetY();
+                            double distance = Math.Sqrt((dx * dx) + (dy * dy));
+
+                            if (distance <= (bilas[i].GetSize() / 2 + bilas[j].GetSize() / 2))
+                            {
+                                bilas[i].ChangeVectors();
+                                bilas[j].ChangeVectors();
+                            }
+                        }
                     }
-                }   
+                    Thread.Sleep(30);
+                }
             }
-            Thread.Sleep(30);
+            catch (ThreadAbortException)
+            {
+                // Wątek został zatrzymany
+            }
         }
     }
 }
