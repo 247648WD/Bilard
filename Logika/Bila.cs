@@ -70,8 +70,8 @@ namespace Logika
             thread.Start();
         }
 
-        private void SetX(double x) { this.X = (int)x; }
-        private void SetY(double y) { this.Y = (int)y; }
+        public void SetX(double x) { this.X = (int)x; }
+        public void SetY(double y) { this.Y = (int)y; }
         private void SetMass(double mass) { this.mass = mass; }
         private void SetSize(int size) { this.size = size; }
         private void SetVecX(double vecX) { Debug.Write(vecX + "\n"); this.vecX = vecX; }
@@ -149,8 +149,18 @@ namespace Logika
 
         public void ChangeVectors(double m1, double vx1, double vy1, double m2, double vx2, double vy2) // odpowiednio modyfikować wektory po zderzeniu
         {
-            this.SetVecX(((m1 - m2) * vx1 + (2 * m2 * vx2)) / (m1 + m2));
-            this.SetVecY(((m1 - m2) * vy1 + (2 * m2 * vy2)) / (m1 + m2));
+
+            
+            lock (SyncObject)
+            {
+                this.SetVecX(((m1 - m2) * vx1 + (2 * m2 * vx2)) / (m1 + m2));
+                this.SetVecY(((m1 - m2) * vy1 + (2 * m2 * vy2)) / (m1 + m2));
+            }
+            /*
+                this.SetVecX(-1 * this.GetVecX());
+                this.SetVecY(-1 * this.GetVecY());
+                
+            */
         }
 
 
@@ -161,31 +171,29 @@ namespace Logika
             {
                 while (true)
                 {
-                    lock (SyncObject)
+                    if (this.GetX() <= minX)
                     {
-                        if (this.GetX() <= minX)
-                        {
-                            this.SetX(minX);
-                            this.SetVecX(-1 * this.GetVecX());
-                        }
-                        if (this.GetX() >= maxX)
-                        {
-                            this.SetX(maxX);
-                            this.SetVecX(-1 * this.GetVecX());
-                        }
-                        if (this.GetY() <= minY)
-                        {
-                            this.SetY(minY);
-                            this.SetVecY(-1 * this.GetVecY());
-                        }
-                        if (this.GetY() >= maxY)
-                        {
-                            this.SetY(maxY);
-                            this.SetVecY(-1 * this.GetVecY());
-                        }
-                        SetX(this.GetX() + this.GetVecX());
-                        SetY(this.GetY() + this.GetVecY());
+                        this.SetX(minX);
+                        this.SetVecX(-1 * this.GetVecX());
                     }
+                    if (this.GetX() >= maxX)
+                    {
+                        this.SetX(maxX);
+                        this.SetVecX(-1 * this.GetVecX());
+                    }
+                    if (this.GetY() <= minY)
+                    {
+                        this.SetY(minY);
+                        this.SetVecY(-1 * this.GetVecY());
+                    }
+                    if (this.GetY() >= maxY)
+                    {
+                        this.SetY(maxY);
+                        this.SetVecY(-1 * this.GetVecY());
+                    }
+                    SetX(this.GetX() + this.GetVecX());
+                    SetY(this.GetY() + this.GetVecY());
+                    
 
                     Thread.Sleep(30);
                     

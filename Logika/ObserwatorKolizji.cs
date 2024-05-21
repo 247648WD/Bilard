@@ -49,8 +49,16 @@ namespace Logika
                                 double dy = bilas[i].GetY() - bilas[j].GetY();
                                 double distance = Math.Sqrt((dx * dx) + (dy * dy));
 
-                                if (distance >= (bilas[i].GetSize() / 2 + bilas[j].GetSize() / 2))
+                                if (distance <= (bilas[i].GetSize() / 2 + bilas[j].GetSize() / 2))
                                 {
+                                    double overlap = 0.7 * (distance - bilas[i].GetSize() / 2 - bilas[j].GetSize() / 2);
+
+                                    bilas[i].SetX(bilas[i].GetX() - overlap * (bilas[i].GetX() - bilas[j].GetX()) / distance);
+                                    bilas[i].SetY(bilas[i].GetY() - overlap * (bilas[i].GetY() - bilas[j].GetY()) / distance);
+
+                                    bilas[j].SetX(bilas[j].GetX() + overlap * (bilas[i].GetX() - bilas[j].GetX()) / distance);
+                                    bilas[j].SetY(bilas[j].GetY() + overlap * (bilas[i].GetY() - bilas[j].GetY()) / distance);
+
                                     double m1 = bilas[i].GetMass();
                                     double vx1 = bilas[i].GetVecX();
                                     double vy1 = bilas[i].GetVecY();
@@ -58,12 +66,13 @@ namespace Logika
                                     double vx2 = bilas[j].GetVecX();
                                     double vy2 = bilas[j].GetVecY();
                                     bilas[i].ChangeVectors(m1, vx1, vy1, m2, vx2, vy2);
-                                    bilas[j].ChangeVectors(m1, vx1, vy1, m2, vx2, vy2);
+                                    bilas[j].ChangeVectors(m2, vx2, vy2, m1, vx1, vy1);
                                 }
+
                             }
                         }
                     }
-                    Thread.Sleep(30);
+                    Thread.Sleep(4);
                 }
             }
             catch (ThreadAbortException)
