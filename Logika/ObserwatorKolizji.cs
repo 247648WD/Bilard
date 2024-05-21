@@ -25,6 +25,13 @@ namespace Logika
             bilas.Clear();
         }
 
+        public int GetAngle(int i, int j)
+        {
+            double y = Math.Abs(bilas[i].GetY() - bilas[j].GetY());
+            double x = Math.Abs(bilas[i].GetX() - bilas[j].GetX());
+            return (int)(Math.Asin(Math.Sin(y / x)) * 180 / Math.PI);
+        }
+
         public void CheckBilas()
         {
             try
@@ -41,8 +48,8 @@ namespace Logika
 
                             if (distance <= (bilas[i].GetSize() / 2 + bilas[j].GetSize() / 2))
                             {
-                                bilas[i].ChangeVectors();
-                                bilas[j].ChangeVectors();
+                                bilas[i].ChangeVectors(bilas[j].GetMass(), bilas[j].GetThisVel(), bilas[j].GetThisDir(), this.GetAngle(i, j));
+                                bilas[j].ChangeVectors(bilas[i].GetMass(), bilas[i].GetThisVel(), bilas[i].GetThisDir(), this.GetAngle(j, i));
                             }
                         }
                     }

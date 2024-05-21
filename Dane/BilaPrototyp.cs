@@ -12,8 +12,8 @@ namespace Dane
         protected double posY;
         protected double mass;
         protected int size;
-        //protected int vel;
-        //protected int dir;
+        protected double vel;
+        protected int dir;
         protected double vecX;
         protected double vecY;
 
