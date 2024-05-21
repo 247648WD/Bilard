@@ -137,17 +137,13 @@ namespace Logika
             int dir1 = this.GetThisDir();
 
 
-
+          
             this.SetVecX((((((v1 * Math.Cos((dir1 - angle) * Math.PI / 180) * (m1 - m2)) + (2 * m2 * v2 * Math.Cos((dir2 - angle) * Math.PI / 180))) / (m1 + m2)) * ((Math.Cos(angle * Math.PI / 180)) + (v1 * Math.Sin((dir1 - angle) * Math.PI / 180) * Math.Cos((angle + 90) * Math.PI / 180))))));
-            this.SetVecX((((((v1 * Math.Cos((dir1 - angle) * Math.PI / 180) * (m1 - m2)) + (2 * m2 * v2 * Math.Cos((dir2 - angle) * Math.PI / 180))) / (m1 + m2)) * ((Math.Sin(angle * Math.PI / 180)) + (v1 * Math.Sin((dir1 - angle) * Math.PI / 180) * Math.Sin((angle + 90) * Math.PI / 180))))));
+            this.SetVecY((((((v1 * Math.Cos((dir1 - angle) * Math.PI / 180) * (m1 - m2)) + (2 * m2 * v2 * Math.Cos((dir2 - angle) * Math.PI / 180))) / (m1 + m2)) * ((Math.Sin(angle * Math.PI / 180)) + (v1 * Math.Sin((dir1 - angle) * Math.PI / 180) * Math.Sin((angle + 90) * Math.PI / 180))))));
             //this.SetVecX(-1 * this.GetVecX());
             //this.SetVecY(-1 * this.GetVecY());
-        }
-            lock (SyncObject)
-            {
-                this.SetVecX(-1 * this.GetVecX());
-                this.SetVecY(-1 * this.GetVecY());
-            }
+
+          
         }
 
         public void Move(int maxX, int minX, int maxY, int minY)
@@ -179,101 +175,7 @@ namespace Logika
                     }
 
                     Thread.Sleep(30);
-
-                    if (this.GetX() <= minX)
-                    {
-                        this.SetVecX(-1 * this.GetVecX());
-                    }
-                    if (this.GetX() >= maxX)
-                    {
-                        this.SetVecX(-1 * this.GetVecX());
-                    }
-                    if (this.GetY() <= minY)
-                    {
-                        this.SetVecY(-1 * this.GetVecY());
-                    }
-                    if (this.GetY() >= maxY)
-                    {
-                        this.SetVecY(-1 * this.GetVecY());
-                    }
-                    /*if (this.GetX() <= minX - 30)
-                    {
-                        this.SetX(this.GetX() + 65);
-                        this.SetVecX(1);
-                    }*/
-                    /*//this.SetX(this.GetX() + this.GetVel());
-                    /*if (this.GetX() <= minX || this.GetX() >= maxX)
-                    {
-                        this.SetVel(this.GetVel() * (-1));
-                    }
-                    if (this.GetX() <= minX)
-                    {
-                        //this.SetDir(90);
-                        if (this.GetDir() == 270)
-                        {
-                            this.SetDir(90);
-                        }
-                        if (this.GetDir() > 180 &&  this.GetDir() < 270)
-                        {
-                            this.SetDir(this.GetDir() - (2 * (90 - (270 - this.GetDir())))); //git
-                        }
-                        if (this.GetDir() > 270 && this.GetDir() < 360)
-                        {
-                            this.SetDir(360 - this.GetDir()); // git
-                        }
-                        //this.SetDir(Math.Abs(this.GetDir() - 180));
-                    }
-                    if (this.GetX() >= maxX)
-                    {
-                        //this.SetDir(270);
-                        if (this.GetDir() == 90)
-                        {
-                            this.SetDir(270);
-                        }
-                        if (this.GetDir() > 90 && this.GetDir() < 180)
-                        {
-                            this.SetDir(this.GetDir() - (2 * (this.GetDir() - 270))); // git
-                        }
-                        if (this.GetDir() > 0 && this.GetDir() < 90)
-                        {
-                            this.SetDir(360 - this.GetDir()); // git
-                        }
-                    }
-                    if (this.GetY() <= minY)
-                    {
-                        //this.SetDir(0);
-                        if (this.GetDir() == 180)
-                        {
-                            this.SetDir(0);
-                        }
-                        if (this.GetDir() > 90 && this.GetDir() < 180)
-                        {
-                            this.SetDir(360 - this.GetDir()); // git
-                        }
-                        if (this.GetDir() > 180 && this.GetDir() < 270)
-                        {
-                            this.SetDir(this.GetDir() + (2 * (270 - this.GetDir()))); // git
-                        }
-                    }
-                    if (this.GetY() >= maxY)
-                    {
-                        //this.SetDir(180);
-                        if (this.GetDir() == 0)
-                        {
-                            this.SetDir(180);
-                        }
-                        if (this.GetDir() > 270 && this.GetDir() < 360)
-                        {
-                            this.SetDir(this.GetDir() + (2 * (180 - this.GetDir()))); // git
-                        }
-                        if (this.GetDir() > 0 && this.GetDir() < 90)
-                        {
-                            this.SetDir(this.GetDir() - (2 * (this.GetDir() - 180))); // git
-                        }
-                    }
-                    this.UpdatePos();
-                    int val = GetDir();*/
-
+                    
                 }
             }
             catch (ThreadAbortException)
