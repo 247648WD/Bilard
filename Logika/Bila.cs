@@ -14,6 +14,7 @@ namespace Logika
     public class Bila : BilaPrototyp, INotifyPropertyChanged
     {
         private Thread thread;
+        private static readonly object SyncObject = new object();
         private int _x;
         private int _y;
 
@@ -122,8 +123,11 @@ namespace Logika
 
         public void ChangeVectors() // odpowiednio modyfikować wektory po zderzeniu
         {
-            this.SetVecX(-1 * this.GetVecX());
-            this.SetVecY(-1 * this.GetVecY());
+            lock (SyncObject)
+            {
+                this.SetVecX(-1 * this.GetVecX());
+                this.SetVecY(-1 * this.GetVecY());
+            }
         }
 
         public void Move(int maxX, int minX, int maxY, int minY)
@@ -132,22 +136,30 @@ namespace Logika
             {
                 while (true)
                 {
-                    if (this.GetX() <= minX)
+                    lock (SyncObject)
                     {
-                        this.SetVecX(-1 * this.GetVecX());
+                        if (this.GetX() <= minX)
+                        {
+                            this.SetVecX(-1 * this.GetVecX());
+                        }
+                        if (this.GetX() >= maxX)
+                        {
+                            this.SetVecX(-1 * this.GetVecX());
+                        }
+                        if (this.GetY() <= minY)
+                        {
+                            this.SetVecY(-1 * this.GetVecY());
+                        }
+                        if (this.GetY() >= maxY)
+                        {
+                            this.SetVecY(-1 * this.GetVecY());
+                        }
+                        SetX(this.GetX() + this.GetVecX());
+                        SetY(this.GetY() + this.GetVecY());
                     }
-                    if (this.GetX() >= maxX)
-                    {
-                        this.SetVecX(-1 * this.GetVecX());
-                    }
-                    if (this.GetY() <= minY)
-                    {
-                        this.SetVecY(-1 * this.GetVecY());
-                    }
-                    if (this.GetY() >= maxY)
-                    {
-                        this.SetVecY(-1 * this.GetVecY());
-                    }
+
+                    Thread.Sleep(30);
+
                     /*//this.SetX(this.GetX() + this.GetVel());
                     /*if (this.GetX() <= minX || this.GetX() >= maxX)
                     {
@@ -220,9 +232,7 @@ namespace Logika
                     }
                     this.UpdatePos();
                     int val = GetDir();*/
-                    SetX(this.GetX() + this.GetVecX());
-                    SetY(this.GetY() + this.GetVecY());
-                    Thread.Sleep(30);
+
                 }
             }
             catch (ThreadAbortException)

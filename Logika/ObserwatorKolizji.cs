@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Logika
 {
-        public class ObserwatorKolizji
+    public class ObserwatorKolizji
     {
+        private static readonly object SyncObject = new object();
         protected Thread thread;
         protected List<Bila> bilas;
         public ObserwatorKolizji() {
@@ -31,18 +32,21 @@ namespace Logika
             {
                 while (true)
                 {
-                    for (int i = 0; i < bilas.Count - 1; i++)
+                    lock (SyncObject)
                     {
-                        for (int j = i + 1; j < bilas.Count; j++)
+                        for (int i = 0; i < bilas.Count - 1; i++)
                         {
-                            double dx = bilas[i].GetX() - bilas[j].GetX();
-                            double dy = bilas[i].GetY() - bilas[j].GetY();
-                            double distance = Math.Sqrt((dx * dx) + (dy * dy));
-
-                            if (distance <= (bilas[i].GetSize() / 2 + bilas[j].GetSize() / 2))
+                            for (int j = i + 1; j < bilas.Count; j++)
                             {
-                                bilas[i].ChangeVectors();
-                                bilas[j].ChangeVectors();
+                                double dx = bilas[i].GetX() - bilas[j].GetX();
+                                double dy = bilas[i].GetY() - bilas[j].GetY();
+                                double distance = Math.Sqrt((dx * dx) + (dy * dy));
+
+                                if (distance <= (bilas[i].GetSize() / 2 + bilas[j].GetSize() / 2))
+                                {
+                                    bilas[i].ChangeVectors();
+                                    bilas[j].ChangeVectors();
+                                }
                             }
                         }
                     }
