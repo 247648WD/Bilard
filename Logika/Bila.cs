@@ -170,29 +170,31 @@ namespace Logika
             {
                 while (true)
                 {
-                    if (this.GetX() <= minX)
+                    lock (SyncObject)
                     {
-                        this.SetX(minX);
-                        this.SetVecX(-1 * this.GetVecX());
+                        if (this.GetX() <= minX)
+                        {
+                            this.SetX(minX);
+                            this.SetVecX(-1 * this.GetVecX());
+                        }
+                        if (this.GetX() >= maxX)
+                        {
+                            this.SetX(maxX);
+                            this.SetVecX(-1 * this.GetVecX());
+                        }
+                        if (this.GetY() <= minY)
+                        {
+                            this.SetY(minY);
+                            this.SetVecY(-1 * this.GetVecY());
+                        }
+                        if (this.GetY() >= maxY)
+                        {
+                            this.SetY(maxY);
+                            this.SetVecY(-1 * this.GetVecY());
+                        }
+                        SetX(this.GetX() + this.GetVecX());
+                        SetY(this.GetY() + this.GetVecY());
                     }
-                    if (this.GetX() >= maxX)
-                    {
-                        this.SetX(maxX);
-                        this.SetVecX(-1 * this.GetVecX());
-                    }
-                    if (this.GetY() <= minY)
-                    {
-                        this.SetY(minY);
-                        this.SetVecY(-1 * this.GetVecY());
-                    }
-                    if (this.GetY() >= maxY)
-                    {
-                        this.SetY(maxY);
-                        this.SetVecY(-1 * this.GetVecY());
-                    }
-                    SetX(this.GetX() + this.GetVecX());
-                    SetY(this.GetY() + this.GetVecY());
-                    
 
                     Thread.Sleep(30);
                     
