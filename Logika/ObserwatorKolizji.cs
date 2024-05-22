@@ -39,11 +39,12 @@ namespace Logika
             {
                 while (true)
                 {
-                    lock (SyncObject)
+                    
+                    for (int i = 0; i < bilas.Count - 1; i++)
                     {
-                        for (int i = 0; i < bilas.Count - 1; i++)
+                        for (int j = i + 1; j < bilas.Count; j++)
                         {
-                            for (int j = i + 1; j < bilas.Count; j++)
+                            lock (SyncObject)
                             {
                                 double dx = bilas[i].GetX() - bilas[j].GetX();
                                 double dy = bilas[i].GetY() - bilas[j].GetY();
@@ -51,7 +52,7 @@ namespace Logika
 
                                 if (distance <= (bilas[i].GetSize() / 2 + bilas[j].GetSize() / 2))
                                 {
-                                    double overlap = 0.7 * (distance - bilas[i].GetSize() / 2 - bilas[j].GetSize() / 2);
+                                    double overlap = 0.5 * (distance - bilas[i].GetSize() / 2 - bilas[j].GetSize() / 2);
 
                                     bilas[i].SetX(bilas[i].GetX() - overlap * (bilas[i].GetX() - bilas[j].GetX()) / distance);
                                     bilas[i].SetY(bilas[i].GetY() - overlap * (bilas[i].GetY() - bilas[j].GetY()) / distance);
@@ -68,7 +69,6 @@ namespace Logika
                                     bilas[i].ChangeVectors(m1, vx1, vy1, m2, vx2, vy2);
                                     bilas[j].ChangeVectors(m2, vx2, vy2, m1, vx1, vy1);
                                 }
-
                             }
                         }
                     }

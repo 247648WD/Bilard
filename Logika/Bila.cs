@@ -126,7 +126,7 @@ namespace Logika
         public Bila GenerateBall(int maxX, int minX, int maxY, int minY)
         {
             Random _random = new Random();
-            return new Bila(_random.Next(minX, maxX), _random.Next(minY, maxY), 0.25, 25, _random.Next(-5, 5), _random.Next(-5, 5));
+            return new Bila(_random.Next(minX, maxX), _random.Next(minY, maxY), 0.25, 20, _random.Next(-5, 5), _random.Next(-5, 5));
             //return (Bila)new Bila().Copy(_random.Next(minX, maxX), _random.Next(minY, maxY), 0, 0, 5, 0);  // TUTAJ ZMIANA PREDKOSCI
         }
 
@@ -150,7 +150,6 @@ namespace Logika
         public void ChangeVectors(double m1, double vx1, double vy1, double m2, double vx2, double vy2) // odpowiednio modyfikować wektory po zderzeniu
         {
 
-            
             lock (SyncObject)
             {
                 this.SetVecX(((m1 - m2) * vx1 + (2 * m2 * vx2)) / (m1 + m2));
