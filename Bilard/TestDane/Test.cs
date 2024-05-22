@@ -1,4 +1,4 @@
-/*using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logika;
 using System.Security.Cryptography;
@@ -16,13 +16,13 @@ namespace Test
         [TestMethod]
         public void BilaTest()
         {
-            b1 = (Bila)b1.Copy(2, 2, 1, 1, 1, 90);
-            Assert.AreEqual(2, b1.GetX());
-            Assert.AreEqual(2, b1.GetY());
+            b1 = (Bila)b1.Copy(0, 0, 1, 1, 1, 1);
+            Assert.AreEqual(0, b1.GetX());
+            Assert.AreEqual(0, b1.GetY());
             Assert.AreEqual(1, b1.GetMass());
-            Assert.AreEqual(1, b1.GetVel());
-            Assert.AreEqual(1, b1.GetVel());
-            Assert.AreEqual(90, b1.GetDir());
+            Assert.AreEqual(1, b1.GetSize());
+            Assert.AreEqual(1, b1.GetVecX());
+            Assert.AreEqual(1, b1.GetVecY());
         }
 
         [TestMethod]
@@ -47,27 +47,14 @@ namespace Test
         [TestMethod]
         public void BilaMoveTest()
         {
-            b2 = (Bila)b2.Copy(2, 1, 1, 1, 1, 0);
-            b3 = (Bila)b3.Copy(1, 1, 1, 1, 1, 0);
-            listMove.Add(b2);
-            listMove.Add(b3);
-            b2.MoveBalls(listMove, 3, 0, 4, 0);
-            Assert.AreEqual(3, b2.GetX());
-            Assert.AreEqual(2, b3.GetX());
-            b2.MoveBalls(listMove, 3, 0, 4, 0);
-            Assert.AreEqual(2, b2.GetX());
-            Assert.AreEqual(3, b3.GetX());
-        }
-
-        public void BilaGenerateTest()
-        {
-            listGenerate = b4.GenerateBalls(3, 5, 1, 3, 2);
-            Assert.IsTrue(listGenerate[0].GetX() < 5 && listGenerate[0].GetX() >= 1);
-            Assert.IsTrue(listGenerate[0].GetY() < 3 && listGenerate[0].GetY() >= 2);
-            Assert.IsTrue(listGenerate[1].GetX() < 5 && listGenerate[0].GetX() >= 1);
-            Assert.IsTrue(listGenerate[1].GetY() < 3 && listGenerate[0].GetY() >= 2);
-            Assert.IsTrue(listGenerate[2].GetX() < 5 && listGenerate[0].GetX() >= 1);
-            Assert.IsTrue(listGenerate[2].GetY() < 3 && listGenerate[0].GetY() >= 2);
+            b2 = (Bila)b2.Copy(-1, -1, 1, 1, -1, -1);
+            b3 = (Bila)b3.Copy(1, 1, 1, 1, 1, 1);
+            b2.MoveTest(10, -10, 10, -10);
+            b3.MoveTest(10, -10, 10, -10);
+            Assert.AreEqual(-1, b2.GetX());
+            Assert.AreEqual(1, b3.GetX());
+            Assert.AreEqual(-1, b2.GetY());
+            Assert.AreEqual(1, b3.GetY());
         }
 
         [TestMethod]
@@ -82,4 +69,4 @@ namespace Test
             Assert.AreEqual(100, s2.GetHeight());
         }
     }
-}*/
+}

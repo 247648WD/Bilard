@@ -74,8 +74,8 @@ namespace Logika
         public void SetY(double y) { this.Y = (int)y; }
         private void SetMass(double mass) { this.mass = mass; }
         private void SetSize(int size) { this.size = size; }
-        private void SetVecX(double vecX) { Debug.Write(vecX + "\n"); this.vecX = vecX; }
-        private void SetVecY(double vecY) { Debug.Write(vecY + "\n"); this.vecY = vecY; }
+        private void SetVecX(double vecX) { this.vecX = vecX; }
+        private void SetVecY(double vecY) { this.vecY = vecY; }
 
         private void SetVel(double vel) { this.vel = vel; }
         private void SetDir(int dir) { this.dir = dir; }
@@ -162,7 +162,10 @@ namespace Logika
             */
         }
 
-
+        public void KillThread()
+        {
+            thread.Interrupt();
+        }
 
         public void Move(int maxX, int minX, int maxY, int minY)
         {
@@ -202,6 +205,32 @@ namespace Logika
             {
                 
             }
+        }
+
+        public void MoveTest(int maxX, int minX, int maxY, int minY)
+        {
+            if (this.GetX() <= minX)
+            {
+                this.SetX(minX);
+                this.SetVecX(-1 * this.GetVecX());
+            }
+            if (this.GetX() >= maxX)
+            {
+                this.SetX(maxX);
+                this.SetVecX(-1 * this.GetVecX());
+            }
+            if (this.GetY() <= minY)
+            {
+                this.SetY(minY);
+                this.SetVecY(-1 * this.GetVecY());
+            }
+            if (this.GetY() >= maxY)
+            {
+                this.SetY(maxY);
+                this.SetVecY(-1 * this.GetVecY());
+            }
+            SetX(this.GetX() + this.GetVecX());
+            SetY(this.GetY() + this.GetVecY());
         }
     }
 }
