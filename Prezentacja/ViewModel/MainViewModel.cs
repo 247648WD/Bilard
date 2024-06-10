@@ -51,16 +51,7 @@ namespace Prezentacja.ViewModel
                 OnPropertyChanged();
             }
         }
-        /*
-        public List<Bila> Balls
-        {
-            get => _balls;
-            set
-            {
-                _balls = value;
-                OnPropertyChanged(nameof(Balls));
-            }
-        }*/
+
         public ObservableCollection<Bila> Balls { get; set; } = new ObservableCollection<Bila>();
 
         public MainViewModel()
@@ -69,11 +60,6 @@ namespace Prezentacja.ViewModel
             _stockPrototyp = (Stol)_stockPrototyp.Copy(230, 220);
             Width = _stockPrototyp._width;
             Height = _stockPrototyp._height;
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            //_modelBila.UpdatePosition(Balls);
         }
 
         private void GenerateBalls()  // METODA ONCLICK DLA PRZYCISKU

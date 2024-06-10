@@ -5,8 +5,18 @@
         Title="Symulacja" Height="450" Width="800">
     <Grid>
 
-        <Canvas Name="canvas" Background="LightGray"/>
-        <Rectangle Fill="Green" Width="{Binding Width}" Height="{Binding Height}" Stroke="Black"/>
+        <Canvas Name="canvas" Background="LightGray">
+
+            <Path Stroke="Black" StrokeThickness="1" Fill="Green">
+                <Path.Data>
+                    <RectangleGeometry>
+                        <RectangleGeometry.Rect>
+                            <Rect X="280" Y="100" Width="230" Height="220" />
+                        </RectangleGeometry.Rect>
+                    </RectangleGeometry>
+                </Path.Data>
+            </Path>
+        </Canvas>
         <Button Content="Generate Balls" Command="{Binding GenerateBallsCommand}" HorizontalAlignment="Left" Margin="10"/>
         <ItemsControl ItemsSource="{Binding Balls}">
             <ItemsControl.ItemsPanel>
@@ -24,6 +34,8 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <TextBox Width="50" Height="20" Margin="112,27,638,357" Text="{Binding QuantityValue, Mode=TwoWay}"></TextBox>
+        <Canvas>
+            <TextBox Canvas.Left="20" Canvas.Top="50" Width="50" Height="20" Margin="112,27,638,357" Text="{Binding QuantityValue, Mode=TwoWay}"></TextBox>
+        </Canvas>
     </Grid>
 </Window>
