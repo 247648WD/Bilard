@@ -40,11 +40,20 @@ namespace Dane
         public override void Log(string time, string message)
         {
             //Debug.WriteLine(this.FilePath);
-            using (System.IO.StreamWriter w = System.IO.File.AppendText(this.FilePath))
-            {
-                w.WriteLine(time);
-                w.WriteLine(message);
-                w.WriteLine("-------------------------");
+            var info = new FileInfo(this.FilePath);
+            
+            using (System.IO.StreamWriter w = System.IO.File.AppendText(this.FilePath)) {
+                if (info.Length == 0)
+                {
+                    w.WriteLine("[");
+                    
+                } else
+                {
+                    w.WriteLine("{\"Time\": \"" + time + "\"}");
+                    w.WriteLine(message + ",");
+                    w.WriteLine("]");
+                }
+                
             }
         }
 
