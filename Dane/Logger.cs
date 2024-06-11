@@ -23,6 +23,7 @@ namespace Dane
             FileChecker.CheckFileExists(LogDirectory + "/" + "Log.json");
             this.FileName = "Log.json";
             this.FilePath = LogDirectory + "/" + FileName;
+            this.ClearFile();
         }
         private void ClearFile()
         {
@@ -36,12 +37,12 @@ namespace Dane
             }
         }
 
-        public override void Log(string message)
+        public override void Log(string time, string message)
         {
-            //this.ClearFile();
-            Debug.WriteLine(this.FilePath);
+            //Debug.WriteLine(this.FilePath);
             using (System.IO.StreamWriter w = System.IO.File.AppendText(this.FilePath))
             {
+                w.WriteLine(time);
                 w.WriteLine(message);
                 w.WriteLine("-------------------------");
             }

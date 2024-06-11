@@ -10,10 +10,10 @@ namespace Dane
     {
         public static void CheckFileExists(string FilePath)
         {
-            if (!File.Exists(FilePath)) 
-            { 
-                File.Create(FilePath);
-                Thread.Sleep(1000);
+            if (!File.Exists(FilePath))
+            {
+                var myFile = File.Create(FilePath);
+                myFile.Close();
             }
         }
 
@@ -22,7 +22,6 @@ namespace Dane
             if (!Directory.Exists(DirectoryPath)) 
             {
                 Directory.CreateDirectory(DirectoryPath);
-                Thread.Sleep(1000);
             }
         }
     }

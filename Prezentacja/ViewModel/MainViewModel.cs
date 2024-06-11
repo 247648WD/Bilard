@@ -61,8 +61,6 @@ namespace Prezentacja.ViewModel
             _stockPrototyp = (Stol)_stockPrototyp.Copy(230, 220);
             Width = _stockPrototyp._width;
             Height = _stockPrototyp._height;
-            Logger logger = new Logger();
-            logger.Log("witam");
         }
 
         private void GenerateBalls()  // METODA ONCLICK DLA PRZYCISKU
@@ -75,6 +73,7 @@ namespace Prezentacja.ViewModel
                 Balls.Add(temp);
                 obs.AddBilas(temp);
             }
+
         }
 
         public ICommand GenerateBallsCommand { get; }  // KOMENDA DLA PRZYCISKU 

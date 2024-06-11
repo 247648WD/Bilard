@@ -10,6 +10,6 @@ namespace Dane
 {
     public abstract class LoggerBase
     {
-        public abstract void Log(string message);
+        public abstract void Log(string time, string message);
     }
 }
