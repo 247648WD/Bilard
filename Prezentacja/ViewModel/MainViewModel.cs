@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Dane;
 using Logika;
 using Prezentacja.Model;
 
@@ -60,6 +61,8 @@ namespace Prezentacja.ViewModel
             _stockPrototyp = (Stol)_stockPrototyp.Copy(230, 220);
             Width = _stockPrototyp._width;
             Height = _stockPrototyp._height;
+            Logger logger = new Logger();
+            logger.Log("witam");
         }
 
         private void GenerateBalls()  // METODA ONCLICK DLA PRZYCISKU
