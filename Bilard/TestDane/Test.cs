@@ -4,6 +4,7 @@ using Logika;
 using System.Security.Cryptography;
 using System.Runtime.Intrinsics.X86;
 using System.Collections.Specialized;
+using Dane;
 
 namespace Test
 {
@@ -31,6 +32,16 @@ namespace Test
             s1 = (Stol)s1.Copy(600, 800);
             Assert.AreEqual(600, s1.GetWidth());
             Assert.AreEqual(800, s1.GetHeight());
+        }
+
+        [TestMethod]
+        public void LoggerTest()
+        {
+            Logger logger = new Logger();
+            logger.Log("test time", "test message");
+            string[] test = File.ReadAllLines(logger.GetFilePath());
+            Assert.AreEqual("{\"Time\": \"test time\"}", test[1]);
+            Assert.AreEqual("test message", test[2]);
         }
     }
 

@@ -73,7 +73,6 @@ namespace Prezentacja.ViewModel
                 Balls.Add(temp);
                 obs.AddBilas(temp);
             }
-
         }
 
         public ICommand GenerateBallsCommand { get; }  // KOMENDA DLA PRZYCISKU 

@@ -49,8 +49,8 @@ namespace Logika
 
         public string GetBilaInfo(int i)
         {
-            //string info = "Pozycja bili" + (i + 1).ToString() + ". X: " + bilas[i].GetX().ToString() + "Pozycja bili" + (i + 1).ToString() + ". Y: " + bilas[i].GetY().ToString();
-            string info = JsonSerializer.Serialize(bilas[i]);
+            string info;
+            info = JsonSerializer.Serialize(bilas[i]) + ",";
             return info;
         }
 
